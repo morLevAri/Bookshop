@@ -5,6 +5,13 @@ var gBooks;
 
 _createBooks();
 
+function addBook(name, price) {
+    var book = _createBook(name)
+    book.price = price;
+    gBooks.unshift(book)
+    _saveBooksToStorage();
+}
+
 function removeBook(bookId) {
     var bookIdx = gBooks.findIndex(function (book) {
         return bookId === book.id
@@ -32,13 +39,13 @@ function updateBook(bookId, bookPrice) {
     _saveBooksToStorage();
 }
 
-function _createBook(name, autor, price) {
+function _createBook(name, price) {
     return {
         id: makeId(),
         name,
-        autor,
         price,
         imgUrl: '',
+        rate: 0,
         desc: makeLoremEn()
     }
 }
@@ -46,15 +53,19 @@ function _createBook(name, autor, price) {
 function _createBooks() {
     var books = loadFromStorage(STORAGE_KEY)
     if (!books || !books.length) {
-        books = [
-            {
-                id: makeId(),
-                name: 'birthday',
-                price: '30',
-                imgUrl: '',
-                desc: makeLoremEn()
-            },
-        ]
+        books = [];
+        books.push(_createBook('felon', 33));
+        books.push(_createBook('the factory', 15));
+        books.push(_createBook('white flights', 26));
+        books.push(_createBook('afternoon of a faun', 40));
+        books.push(_createBook('birthday', 13));
+        books.push(_createBook('dominicana', 22));
+        books.push(_createBook('flash count diary', 30));
+        books.push(_createBook('hot cold heavy light', 14));
+        books.push(_createBook('muscle', 19));
+        books.push(_createBook('tears of the truffle pig', 35));
+        books.push(_createBook('the organs of sense', 16));
+        books.push(_createBook('the unwanted', 25));
     }
     gBooks = books;
     _saveBooksToStorage();

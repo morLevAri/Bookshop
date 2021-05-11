@@ -10,15 +10,20 @@
 </head>
 
 <body onload="onInit()">
-    <h1>Books CRUDL</h1>
+    <h1>Book Shop</h1>
 
-    <section class="add-book"></section>
+    <section class="add-book">
+        <input type="text" name="bookName" placeholder="Book Name" />
+        <input type="text" name="bookPrice" placeholder="Price" />
+        <button onclick="onAddBook()">Add</button>
+    </section>
+
     <section class="books-container"></section>
 
     <div class="modal" hidden>
         <h5></h5>
         <h6></h6>
-        <img>
+        <h5 class="img"></h5>
         <p></p>
         <button onclick="onCloseModal()">Close</button>
     </div>
