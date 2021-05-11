@@ -17,13 +17,29 @@ function getBooksForDisplay() {
     return gBooks
 }
 
-function _createBook(name, price) {
+function getBookById(bookId) {
+    var book = gBooks.find(function (book) {
+        return bookId === book.id
+    })
+    return book
+}
+
+function updateBook(bookId, bookPrice) {
+    var book = gBooks.find(function (book) {
+        return book.id === bookId;
+    })
+    book.price = bookPrice;
+    _saveBooksToStorage();
+}
+
+function _createBook(name, autor, price) {
     return {
         id: makeId(),
         name,
+        autor,
         price,
         imgUrl: '',
-        txt: makeLoremEn()
+        desc: makeLoremEn()
     }
 }
 
@@ -32,15 +48,14 @@ function _createBooks() {
     if (!books || !books.length) {
         books = [
             {
-                name: 'birthday',
                 id: makeId(),
+                name: 'birthday',
                 price: '30',
                 imgUrl: '',
                 desc: makeLoremEn()
             },
         ]
     }
-    _createBook()
     gBooks = books;
     _saveBooksToStorage();
 }
