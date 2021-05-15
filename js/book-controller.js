@@ -15,6 +15,7 @@ function renderBooks() {
             <img class="book-cover-img" src="img/${book.name}.jpg" alt="image not found">
                 <h5 class="card-title">${book.name}</h5>
                 <p class="card-price">Price: $${book.price}</p>
+                <p class="card-rate">Rate: ${book.rate}</p>
                 <a href="#" onclick="onReadBook('${book.id}')">Details</a>
                 <a href="#" onclick="onUpdateBook('${book.id}')">Update</a>
             </div>
@@ -22,6 +23,17 @@ function renderBooks() {
         `
     })
     document.querySelector('.books-container').innerHTML = strHtmls.join('')
+}
+
+
+function renderModal(bookId) {
+    var book = getBookById(bookId)
+    var strHtmls =
+        `<button class="rate" title="up" onclick="onRate('${book.id}',this.title)">+</button>
+        <p class="rate-display">${book.rate}</p>
+        <button class="rate"  title="down" onclick="onRate('${book.id}',this.title)">-</button>
+         `
+    document.querySelector('.rate-container').innerHTML = strHtmls;
 }
 
 function onRemoveBook(bookId) {
@@ -48,17 +60,28 @@ function onUpdateBook(bookId) {
 }
 
 function onReadBook(bookId) {
+    renderModal(bookId)
     var book = getBookById(bookId)
     var elModal = document.querySelector('.modal')
     elModal.querySelector('h5').innerText = book.name
     elModal.querySelector('h6').innerText = book.price
     elModal.querySelector('p').innerText = book.desc
     elModal.querySelector('.img').innerHTML = `<img class="book-modal-img" src="img/${book.name}.jpg"/>`
-
-
-    elModal.hidden = false;
+    elModal.style.right = '0px';
 }
 
 function onCloseModal() {
-    document.querySelector('.modal').hidden = true
+    document.querySelector('.modal').style.right = '-400px';
+    // document.addEventListener('mouseup', function (e) {
+    //     var elModal = document.querySelector('.modal')
+    //     if (!elModal.contains(e.target)) {
+    //         elModal.style.right = '-400px';
+    //     }
+    // });
+}
+
+function onRate(bookId, direction) {
+    rate(bookId, direction)
+    renderModal(bookId)
+    renderBooks();
 }

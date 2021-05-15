@@ -2,11 +2,16 @@
 
 const STORAGE_KEY = 'booksDB';
 var gBooks;
+var maxRate = 10;
 
 _createBooks();
 
 function addBook(name, price) {
     var book = _createBook(name)
+    if (isNaN(price)) {
+        alert('Please enter a number')
+        return;
+    }
     book.price = price;
     gBooks.unshift(book)
     _saveBooksToStorage();
@@ -39,12 +44,24 @@ function updateBook(bookId, bookPrice) {
     _saveBooksToStorage();
 }
 
+function rate(bookId, direction) {
+    var book = gBooks.find(function (book) {
+        return book.id === bookId;
+    })
+    if (direction === 'up' && book.rate < maxRate) {
+        book.rate++
+    }
+    if (direction === 'down' && book.rate > 0) {
+        book.rate--
+    }
+    _saveBooksToStorage();
+}
+
 function _createBook(name, price) {
     return {
         id: makeId(),
         name,
         price,
-        imgUrl: '',
         rate: 0,
         desc: makeLoremEn()
     }
