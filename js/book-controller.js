@@ -1,12 +1,12 @@
 'use strict'
 
-
 function onInit() {
     renderBooks()
 }
 
 function renderBooks() {
-    var books = getBooksForDisplay()
+    var books = sortBooks(books)
+    books = getBooksForDisplay();
     var strHtmls = books.map(function (book) {
         return `
         <div class="book-preview">
@@ -24,7 +24,6 @@ function renderBooks() {
     })
     document.querySelector('.books-container').innerHTML = strHtmls.join('')
 }
-
 
 function renderModal(bookId) {
     var book = getBookById(bookId)
@@ -70,6 +69,11 @@ function onReadBook(bookId) {
     elModal.style.right = '0px';
 }
 
+function onSetSort(sortBy) {
+    setSort(sortBy)
+    renderBooks();
+}
+
 function onCloseModal() {
     document.querySelector('.modal').style.right = '-400px';
     // document.addEventListener('mouseup', function (e) {
@@ -83,5 +87,15 @@ function onCloseModal() {
 function onRate(bookId, direction) {
     rate(bookId, direction)
     renderModal(bookId)
+    renderBooks();
+}
+
+function onPreviousPage() {
+    previousPage();
+    renderBooks();
+}
+
+function onNextPage() {
+    nextPage();
     renderBooks();
 }

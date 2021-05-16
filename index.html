@@ -18,6 +18,16 @@
         <button onclick="onAddBook()">Add</button>
     </section>
 
+    <section class="sorting">
+        Sort By:
+        <select name="" id="" onchange="onSetSort(this.value)">
+            <option value="created">Created</option>
+            <option value="name">Name</option>
+            <option value="rate">Rate</option>
+            <option value="price">Price</option>
+        </select>
+    </section>
+
     <section class="books-container"></section>
 
     <div class="modal">
@@ -28,6 +38,11 @@
         <section class="rate-container"></section>
         <button onclick="onCloseModal()">Close</button>
     </div>
+
+    <section class="paging">
+        <button onclick="onPreviousPage()">Previous Page</button>
+        <button onclick="onNextPage()">Next Page</button>
+    </section>
 
     <script src="js/services/util-service.js"></script>
     <script src="js/services/storage-service.js"></script>
