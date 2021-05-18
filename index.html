@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crudl books</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body onload="onInit()">
+    <h1>Book Shop</h1>
+
+    <section class="add-book">
+        <input type="text" name="bookName" placeholder="Book Name" />
+        <input type="text" name="bookPrice" placeholder="Price" />
+        <button onclick="onAddBook()">Add</button>
+    </section>
+
+    <section class="sorting">
+        Sort By:
+        <select name="" id="" onchange="onSetSort(this.value)">
+            <option value="created">Created</option>
+            <option value="name">Name</option>
+            <option value="rate">Rate</option>
+            <option value="price">Price</option>
+        </select>
+    </section>
+
+    <section class="books-container"></section>
+
+    <div class="modal">
+        <h5></h5>
+        <h6></h6>
+        <h5 class="img"></h5>
+        <p></p>
+        <section class="rate-container"></section>
+        <button onclick="onCloseModal()">Close</button>
+    </div>
+
+    <section class="paging">
+        <button onclick="onPreviousPage()">Previous Page</button>
+        <button onclick="onNextPage()">Next Page</button>
+    </section>
+
+    <script src="js/services/util-service.js"></script>
+    <script src="js/services/storage-service.js"></script>
+    <script src="js/services/book-service.js"></script>
+    <script src="js/book-controller.js"></script>
+</body>
+
+</html>
