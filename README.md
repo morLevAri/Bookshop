@@ -1,5 +1,5 @@
 # Bookshop
-A CRUDL project
+A basic CRUDL project- vanilla js
 
 Take a look: https://morlevari.github.io/Bookshop/
 
